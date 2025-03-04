@@ -1,4 +1,4 @@
-# Impor libraries yang diperlukan
+# Import libs
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -15,17 +15,17 @@ data = pd.read_excel(file_path)
 drop_columns = ['Unnamed: 10', 'Unnamed: 11', 'Z', 'Unnamed: 13', 'Unnamed: 14', 'Unnamed: 15']
 data = data.drop(columns=[col for col in drop_columns if col in data.columns])
 
-# Hapus kolom 'nomor' jika ada
+# Hapus kolom nomor
 if 'nomor' in data.columns:
     data = data.drop(columns=['nomor'])
 
-# Periksa nilai yang hilang sebelum pemrosesan
+# Periksa nilai
 print("Nilai yang hilang sebelum penanganan:\n", data.isnull().sum())
 
-# Ubah kolom kategorikal menjadi numerik menggunakan one-hot encoding
+# kategorikal menjadi numerik one-hot encoding
 data = pd.get_dummies(data, drop_first=True)
 
-# Isi nilai yang hilang pada kolom numerik dengan rata-rata
+# Isi nilai pada kolom numerik dengan rata-rata
 data = data.fillna(data.mean())
 
 # Pisahkan dataset menjadi fitur (X) dan variabel target (Y)
@@ -39,7 +39,7 @@ X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_
 print("Nilai yang hilang di X_train:", X_train.isnull().sum().sum())
 print("Nilai yang hilang di X_test:", X_test.isnull().sum().sum())
 
-# Hapus baris NaN yang tersisa (sebagai upaya terakhir)
+# Hapus baris NaN yang tersisa (LAST DITCH EFFORT)
 X_train = X_train.dropna()
 X_test = X_test.dropna()
 Y_train = Y_train.loc[X_train.index]  # Sesuaikan Y_train dengan X_train
