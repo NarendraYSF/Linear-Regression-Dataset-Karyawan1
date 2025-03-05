@@ -11,10 +11,6 @@ from sklearn.metrics import mean_squared_error, r2_score
 file_path = "Karyawan1.xlsx"
 data = pd.read_excel(file_path)
 
-# Hapus kolom yang tidak diperlukan jika ada
-drop_columns = ['Unnamed: 10', 'Unnamed: 11', 'Z', 'Unnamed: 13', 'Unnamed: 14', 'Unnamed: 15']
-data = data.drop(columns=[col for col in drop_columns if col in data.columns])
-
 # Hapus kolom nomor
 if 'nomor' in data.columns:
     data = data.drop(columns=['nomor'])
